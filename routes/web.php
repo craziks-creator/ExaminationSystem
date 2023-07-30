@@ -45,7 +45,3 @@ Route::get('migrate',function(){
    Artisan::call('migrate');
 });
 
-Route::get('/clear-cache', function() {
-     $exitCode = Artisan::call('cache:clear');
-     return 'Application cache cleared';
- });
