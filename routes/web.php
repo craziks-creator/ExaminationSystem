@@ -43,3 +43,4 @@ Route::get('/linkstorage', function () {
 
 Route::get('migrate',function(){
    Artisan::call('migrate');
+});
