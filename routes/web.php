@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ExamPatternController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,3 +36,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admin_auth']], function 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+
+Route::get('migrate',function(){
+   Artisan::call('migrate');
