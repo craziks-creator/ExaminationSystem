@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>['auth','admin_auth']], function (){
