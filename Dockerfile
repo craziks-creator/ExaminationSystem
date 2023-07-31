@@ -5,7 +5,7 @@ WORKDIR /var/www/html/public
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run dev
+
 
 # Image config
 ENV SKIP_COMPOSER 1
