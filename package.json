@@ -9,6 +9,12 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
+     "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "ts-node-dev --respawn src/Union.ts",
+    "serve": "ts-node-dev src/function.ts",
+    "build": "tsc"
+  },
     "devDependencies": {
         "axios": "^0.21",
         "bootstrap": "^4.1.0",
