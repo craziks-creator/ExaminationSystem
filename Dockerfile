@@ -1,6 +1,13 @@
-FROM richarvey/nginx-php-fpm:latest 
+
+FROM node:alpine as build
+WORKDIR /var/www/html/public
+COPY package.json package-lock.json ./
+RUN npm install
 COPY . .
 
+
+FROM richarvey/nginx-php-fpm:latest 
+COPY . .
 
 # Image config
 ENV SKIP_COMPOSER 1
@@ -16,10 +23,9 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Copy Node.js dependencies from the build container
+COPY --from=build /var/www/html/public/node_modules/ /var/www/html/public/node_modules/
+
 CMD ["/start.sh"]
-FROM node:alpine as build
-WORKDIR /var/www/html/public
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . .
-CMD [ "npm", "start" ]
+
