@@ -21,5 +21,4 @@ WORKDIR /var/www/html/public
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
 CMD ["/start.sh"]
