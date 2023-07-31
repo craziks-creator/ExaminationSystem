@@ -1,6 +1,12 @@
 FROM richarvey/nginx-php-fpm:latest 
-
 COPY . .
+FROM node:alpine as build-deps
+WORKDIR /var/www/html/public
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run dev
+
 # Image config
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
@@ -15,10 +21,4 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
-FROM node:alpine as build-deps
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm install
-COPY . ./
-RUN npm run dev
 CMD ["/start.sh"]
