@@ -16,11 +16,11 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
-
-FROM node:14-alpine as build
-WORKDIR /app
-COPY package*.json ./
+FROM node:alpine as build
+WORKDIR /var/www/html/public
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
+RUN npm run production
 RUN npm run build
 CMD ["/start.sh"]
