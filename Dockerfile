@@ -16,7 +16,8 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
-FROM nginx:alpine
+
+FROM node:14-alpine as build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
