@@ -16,4 +16,8 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+FROM nginx:alpine
+COPY --from=build-deps /var/www/html/public/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 CMD ["/start.sh"]
