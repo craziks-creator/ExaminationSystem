@@ -23,9 +23,13 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+# Copy application code to the container
+COPY . /var/www/html/public
+
+# Copy pre-built frontend assets from local "assets" directory to the container
+COPY assets/ /var/www/html/public/
 
 # Copy Node.js dependencies from the build container
 COPY --from=build /var/www/html/public/node_modules/ /var/www/html/public/node_modules/
-
 CMD ["/start.sh"]
 
